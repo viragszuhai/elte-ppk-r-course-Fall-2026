@@ -73,8 +73,12 @@ view()
 
 How many different ingredients you will need?
 
-```{r}
+```{r unique-ingredients}
+n_ingredients <- coctail_ingredients_alphabetical %>%
+  count(ingredients) %>%
+  summarise(n_unique = n_distinct(ingredients))
 
+print(n_ingredients)
 ```
 
 ## 5. What are the top 10 ingredients?
