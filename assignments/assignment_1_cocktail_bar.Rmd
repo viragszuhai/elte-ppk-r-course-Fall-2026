@@ -85,8 +85,13 @@ print(n_ingredients)
 
 What are the 10 most frequently used ingredients? If there are ties, you can list more than 10.
 
-```{r}
+```{r top-10-ingredients, echo = TRUE}
+top_10 <- coctail_clean %>%
+  mutate(ingredients = str_to_title(ingredients)) %>%
+  count(ingredients, sort = TRUE)  %>% 
+  slice_max(n, n = 10, with_ties = TRUE) %>% 
 
+view()
 ```
 
 ## 6. Which cocktail(s) has/have the most ingredients?
