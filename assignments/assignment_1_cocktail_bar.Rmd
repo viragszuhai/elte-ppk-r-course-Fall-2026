@@ -110,8 +110,13 @@ view(most_ingredients)
 
 Count all cocktails with only one ingredient, and
 
-```{r}
+```{r rare-ingredient, echo = TRUE}
+rare_ingredients <- coctail_clean %>%
+  distinct(name, ingredients) %>%
+  count(ingredients) %>%
+  filter(n == 1)
 
+nrow(rare_ingredients)
 ```
 
 ## 8. Which cocktail has an ingredient that is only used in one cocktail?
