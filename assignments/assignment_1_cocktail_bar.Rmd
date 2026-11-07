@@ -98,8 +98,12 @@ view()
 
 Count the number of ingredients and filter all the cocktails that has that many.
 
-```{r}
-
+```{r cocktail-most-ingredients, echo = TRUE}
+most_ingredients <- coctail_clean %>% 
+  count(name, name = "n_ingredients",  sort = TRUE) %>%
+  slice_max(n_ingredients, n = 1, with_ties = TRUE)
+  
+view(most_ingredients)
 ```
 
 ## 7. How many ingredients appear in only one cocktail (rare ingredient)?
