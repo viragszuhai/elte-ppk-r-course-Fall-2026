@@ -163,8 +163,17 @@ tribble(~name, ~Lime, ~`White rum`, ~`Cane sugar`, ~`Coca-cola`, ~Mint, ~Soda,
     relocate(name, sort(names(.)))
 ```
 
-```{r}
-
+```{r cheat-sheet, echo = TRUE}
+cheat_sheet <- coctail_clean %>%
+  mutate(ingredients = str_to_sentence(ingredients)) %>%
+  filter(ingredients != "") %>%         
+  distinct(name, ingredients) %>%                         
+  mutate(value = "X") %>%
+  pivot_wider(names_from = ingredients,
+              values_from = value,
+              values_fill = "") %>%                       
+  relocate(name, sort(names(.)))         
+view(cheat_sheet)
 ```
 
 
