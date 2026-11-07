@@ -121,8 +121,19 @@ nrow(rare_ingredients)
 
 ## 8. Which cocktail has an ingredient that is only used in one cocktail?
 
-```{r}
+```{r one-cocktail-ingredient, echo = TRUE}
+pairs <- coctail_clean %>%
+  distinct(name, ingredients)
 
+unique_ingredients <- pairs %>%
+  count(ingredients) %>%
+  filter(n == 1)
+
+result <- pairs %>%
+  filter(ingredients %in% rare_ingredients$ingredients) %>%
+  distinct(name)
+
+nrow(result)  
 ```
 
 ## 9. What are the cocktails without rare ingredients?
