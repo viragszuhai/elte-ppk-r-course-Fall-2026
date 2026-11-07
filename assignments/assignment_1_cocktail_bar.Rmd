@@ -138,8 +138,17 @@ nrow(result)
 
 ## 9. What are the cocktails without rare ingredients?
 
-```{r}
-  
+```{r no-rare-ingredients, echo = TRUE}
+all_cocktails <- coctail_clean %>%
+  distinct(name)
+
+cocktails_with_rare <- result %>%
+  distinct(name)
+
+no_rare <- all_cocktails %>%
+  anti_join(cocktails_with_rare, by = "name")
+
+nrow(no_rare)
 ```
 
 ## 10. Create a cheat sheet for the bartender!
