@@ -41,8 +41,17 @@ view(coctail_data)
 
 The ingredients are currently in a single cell for each cocktail. It would be better to put them in separate rows. Also, the variable should be cleaned of all quantities (e.g. 1/2 oz, 2 dashes, etc.), and the indicator of alcohol content (e.g. 47.3% abv). You will need to use this cleaned table in later tasks.
 
-```{r}
+```{r coctail_clean, include = FALSE}
+coctail_clean <- coctail_data %>% 
+  separate_longer_delim(cols = ingredients,
+                        delim = regex("<br\\s*/?>|<b4\\s*/?>")) %>%
+ mutate(
+   ingredients = ingredients %>% 
+     str_remove("\\(?\\s*[0-9.]+\\s*%\\s*abv\\s*\\)?") %>% 
+     str_remove("^[0-9/. ]+(oz|dashes|dash|drops|drop)?\\s*") %>% 
+     str_squish()) %>% 
 
+view()
 ```
 
 ## 3. All ingredients in alphabetical order
