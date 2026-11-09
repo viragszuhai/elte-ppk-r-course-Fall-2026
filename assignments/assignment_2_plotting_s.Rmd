@@ -95,6 +95,8 @@ Notes:
 -   The point size is 2, . The theme is set to light.
 
 ```{r commute-in-the-us}
+commute <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/refs/heads/main/data/2019/2019-11-05/commute.csv")
+
 commute %>%
   group_by(state, state_abb, state_region, mode) %>%
   summarise(total = sum(n), .groups = "drop") %>%
