@@ -62,8 +62,26 @@ Notes:
 -   To make the x axis breaks pretty, use `scales::pretty_breaks()`, to make the y axis labels comma formatted, use `scales::comma_format()`.
 -   The line size is 1.2, the colors are from the brewer "Dark2" palette. The theme is set to minimal.
 
-```{r}
+```{r phd-by-field}
+phd_by_field <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/refs/heads/main/data/2019/2019-02-19/phd_by_field.csv")
 
+glimpse(phd_by_field)
+
+phd_by_field %>%
+  group_by(broad_field, year) %>%
+  summarise(total = sum(n_phds, na.rm = TRUE), .groups = "drop") %>%
+ggplot(aes(x = year, y = total, color = broad_field)) +
+  geom_line(linewidth = 1.2) +
+  scale_x_continuous(breaks = scales::pretty_breaks()) +
+  scale_y_continuous(labels = scales::comma_format()) +
+  scale_color_brewer(palette = "Dark2") +
+  theme_minimal() +
+  labs(
+    title = "Number of awarded PhDs in the US by year",
+    x = NULL,
+    y = NULL,
+    color = "Broad field"
+  )
 ```
 
 ## Task 3: Commute in the US
