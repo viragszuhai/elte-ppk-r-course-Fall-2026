@@ -94,6 +94,18 @@ Notes:
 -   Both axis scales are log transformed and the labels comma formatted, using `scales::comma_format()`
 -   The point size is 2, . The theme is set to light.
 
-```{r}
-
+```{r commute-in-the-us}
+commute %>%
+  group_by(state, state_abb, state_region, mode) %>%
+  summarise(total = sum(n), .groups = "drop") %>%
+  pivot_wider(names_from = mode, values_from = total) %>%
+  ggplot(aes(x = Walk, y = Bike, color = state_region)) + 
+  geom_point(size = 2) + 
+  theme(legend.position = "right") + 
+  labs(
+    title = "The number of people walking vs. biking to work in each USA state",
+    x = "Number of ppl walking to work (log N)",
+    y = "Number of ppl biking to work (log N)" ,
+    color = "State region" 
+    )
 ```
