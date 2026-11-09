@@ -103,6 +103,10 @@ commute %>%
   pivot_wider(names_from = mode, values_from = total) %>%
   ggplot(aes(x = Walk, y = Bike, color = state_region)) + 
   geom_point(size = 2) + 
+  geom_text(aes(label = state_abb), color = "black") + 
+  scale_x_log10(labels = scales::comma_format()) + 
+  scale_y_log10(labels = scales::comma_format()) +
+  theme_light() + 
   theme(legend.position = "right") + 
   labs(
     title = "The number of people walking vs. biking to work in each USA state",
@@ -110,4 +114,5 @@ commute %>%
     y = "Number of ppl biking to work (log N)" ,
     color = "State region" 
     )
+
 ```
