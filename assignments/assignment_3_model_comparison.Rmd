@@ -58,8 +58,13 @@ In your discussion of the findings, briefly interpret the results of the above a
 
 Read the dataset used in this assignment. Pay attention to the extension of the datafile.
 
-```{r}
+```{r load-data}
+library(tidyverse)
+library(readxl)
 
+df <- read_excel("/Users/szuhaivirag/Desktop/R assingments/R - interim assignment new2/R - interim assignments/data/assignment_3_dataset.xlsx")
+
+view(df)
 ```
 
 ## Data and model diagnostics 
